@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,12 +61,21 @@ public class DetalhesLivroFragment extends Fragment {
             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_detalhes_livro, container, false);
         ButterKnife.bind(this, view);
-
-        Bundle arguments = getArguments();
-        livro = (Livro) arguments.getSerializable("livro");
         populaCamposCom(livro);
 
         return view;
+
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        Bundle arguments = getArguments();
+        livro = (Livro) arguments.getSerializable("livro");
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity.getSupportActionBar().setTitle(livro.getNome());
+        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 
