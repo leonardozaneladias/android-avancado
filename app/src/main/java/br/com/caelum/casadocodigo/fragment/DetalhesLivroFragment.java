@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import br.com.caelum.casadocodigo.R;
 import br.com.caelum.casadocodigo.modelo.Autor;
 import br.com.caelum.casadocodigo.modelo.Livro;
@@ -92,6 +94,8 @@ public class DetalhesLivroFragment extends Fragment {
 
         String textoComprarAmbos = String.format("Comprar ambos - R$ %.2f", livro.getValorDoisJuntos());
         botaoComprarAmbos.setText(textoComprarAmbos);
+
+        Picasso.get().load(livro.getUrlFoto()).into(foto);
 
     }
 }
