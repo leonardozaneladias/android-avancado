@@ -1,6 +1,8 @@
 package br.com.caelum.casadocodigo.activity;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
@@ -32,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements LivrosDelegate {
         transaction.replace(R.id.frame_principal, listaLivrosFragment);
         transaction.commit();
 
-        new WebClient().getLivros();
+        new WebClient().getLivros(0,5);
 
         EventBus.getDefault().register(this);
     }
@@ -58,6 +60,10 @@ public class MainActivity extends AppCompatActivity implements LivrosDelegate {
 
     @Subscribe
     public void lidaComSucesso(LivroEvent livroEvent) {
+
+
+
+
         listaLivrosFragment.populaListaCom(livroEvent.getLivros());
     }
 

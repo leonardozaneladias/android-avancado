@@ -17,7 +17,7 @@ public class WebClient {
 
     private static final String SERVER_URL = "http://cdcmob.herokuapp.com/";
 
-    public void getLivros(){
+    public void getLivros(int indicePrimeiroLivro, int qtdLivros){
 
         Retrofit client = new Retrofit.Builder()
                 .baseUrl(SERVER_URL)
@@ -26,7 +26,7 @@ public class WebClient {
 
         LivrosService service = client.create(LivrosService.class);
 
-        Call<List<Livro>> call = service.listaLivros();
+        Call<List<Livro>> call = service.listaLivros(indicePrimeiroLivro, qtdLivros);
 
         call.enqueue(new Callback<List<Livro>>() {
             @Override
