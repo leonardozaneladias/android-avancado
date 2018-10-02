@@ -92,7 +92,6 @@ public class DetalhesLivroFragment extends Fragment {
 
         String textoComprarAmbos = String.format("Comprar ambos - R$ %.2f", livro.getValorDoisJuntos());
         botaoComprarAmbos.setText(textoComprarAmbos);
-        
 
     }
 }
