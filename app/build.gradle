@@ -44,4 +44,5 @@ dependencies {
     annotationProcessor 'com.google.dagger:dagger-compiler:2.8'
 
     implementation 'com.google.firebase:firebase-auth:16.0.4'
+    implementation 'com.google.firebase:firebase-config:16.0.1'
 }
