@@ -7,4 +7,10 @@
         android:title="Carrinho"
         app:showAsAction="always"
         ></item>
+
+    <item
+        android:id="@+id/logout"
+        android:title="Sair"
+        app:showAsAction="never"
+        ></item>
 </menu>

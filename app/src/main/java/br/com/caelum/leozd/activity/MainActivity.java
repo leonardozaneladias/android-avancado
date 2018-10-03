@@ -8,6 +8,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
@@ -64,6 +66,16 @@ public class MainActivity extends AppCompatActivity implements LivrosDelegate {
             case R.id.vai_para_carrinho:
                 Intent intent = new Intent(this, CarrinhoActivity.class);
                 startActivity(intent);
+
+            case R.id.logout:
+
+                FirebaseAuth.getInstance().signOut();
+
+                finish();
+                Intent vaiParaLogin = new Intent(this, LoginActivity.class);
+                startActivity(vaiParaLogin);
+
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
