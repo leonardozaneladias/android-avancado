@@ -9,9 +9,11 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.messaging.RemoteMessage;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import br.com.caelum.leozd.R;
 import br.com.caelum.leozd.delegate.LivrosDelegate;
@@ -66,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements LivrosDelegate {
             case R.id.vai_para_carrinho:
                 Intent intent = new Intent(this, CarrinhoActivity.class);
                 startActivity(intent);
+                break;
 
             case R.id.logout:
 
@@ -115,5 +118,10 @@ public class MainActivity extends AppCompatActivity implements LivrosDelegate {
         DetalhesLivroFragment detalhesLivroFragment = new DetalhesLivroFragment();
         detalhesLivroFragment.setArguments(bundle);
         return detalhesLivroFragment;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void recebeNotificacao(RemoteMessage message){
+        Toast.makeText(this, "Notificação recebida", Toast.LENGTH_LONG).show();
     }
 }

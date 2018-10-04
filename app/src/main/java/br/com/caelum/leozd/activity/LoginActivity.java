@@ -10,12 +10,16 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.messaging.RemoteMessage;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import br.com.caelum.leozd.R;
 import butterknife.BindView;
@@ -136,4 +140,6 @@ public class LoginActivity extends AppCompatActivity {
             Snackbar.make(campoSenha, "Todos os campos são obrigatórios", Snackbar.LENGTH_INDEFINITE).show();
         }
     }
+
+
 }
