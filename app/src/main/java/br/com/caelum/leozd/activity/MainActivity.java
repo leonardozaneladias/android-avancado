@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.RemoteMessage;
 
 import org.greenrobot.eventbus.EventBus;
@@ -22,6 +25,7 @@ import br.com.caelum.leozd.fragment.DetalhesLivroFragment;
 import br.com.caelum.leozd.fragment.ListaLivrosFragment;
 import br.com.caelum.leozd.modelo.Livro;
 import br.com.caelum.leozd.server.WebClient;
+import br.com.caelum.leozd.service.TokenGenerator;
 
 public class MainActivity extends AppCompatActivity implements LivrosDelegate {
 
@@ -36,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements LivrosDelegate {
         listaLivrosFragment = new ListaLivrosFragment();
         transaction.replace(R.id.frame_principal, listaLivrosFragment);
         transaction.commit();
+
+        new TokenGenerator().generate();
 
         new WebClient().getLivros(0,5);
 
@@ -73,7 +79,6 @@ public class MainActivity extends AppCompatActivity implements LivrosDelegate {
             case R.id.logout:
 
                 FirebaseAuth.getInstance().signOut();
-
                 finish();
                 Intent vaiParaLogin = new Intent(this, LoginActivity.class);
                 startActivity(vaiParaLogin);
@@ -123,5 +128,17 @@ public class MainActivity extends AppCompatActivity implements LivrosDelegate {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void recebeNotificacao(RemoteMessage message){
         Toast.makeText(this, "Notificação recebida", Toast.LENGTH_LONG).show();
+    }
+
+    @Subscribe
+    public void recebeToken(InstanceIdResult result){
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String email = user.getEmail();
+
+        String token = result.getToken();
+
+        Log.e("email do cara", email);
+        Log.e("token do cara", token);
     }
 }
